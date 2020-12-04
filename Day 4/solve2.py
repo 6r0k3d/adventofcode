@@ -70,7 +70,7 @@ def val_hcl(value):
         return 0
 
     # https://stackoverflow.com/a/1636354/1101802
-    x = re.search("^#(?:[0-9a-fA-F]{3}){1,2}$", value)
+    x = re.search("^#[a-z0-9]{6}$", value)
     if x:
         #print("valid")
         return 1
@@ -92,16 +92,12 @@ def val_ecl(value):
 # pid (Passport ID) - a nine-digit number, including leading zeroes.
 def val_pid(value):
     #print("pid: ", value, end=' ')
-    try:
-        if 000000000 <= int(value) <= 999999999:
-            #print("valid")
-            return 1
-        else:
-            #print("invalid")
-            return 0
-    except:
-        #print("invalid")
+    x = re.search("^\d{9}$", value)
+    if x:
+        return 1
+    else:
         return 0
+
 
 #cid (Country ID) - ignored, missing or not.
 def val_cid(value):
